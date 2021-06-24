@@ -54,7 +54,7 @@ export default {
                     setDefaultsOnInsert: true,
                 },
                 (err, docs) => {
-                    if (!err) res.status(200).json(docs);
+                    if (!err) return res.status(200).json(docs);
                     return res.status(500).json({ message: err });
                 },
             ).select('-password');
