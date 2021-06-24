@@ -27,6 +27,6 @@ router.patch('/unfollow/:id', userController.unfollow);
  * Les autres données que le fichier doivent être mise avant le fichier
  * sinon elles ne sont pas envoyées !
  */
-router.post('/upload', multer, sharp, uploadController.uploadProfile);
+router.post('/upload', multer.avatar, sharp, uploadController.uploadProfile);
 
 export default router;

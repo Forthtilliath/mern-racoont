@@ -12,7 +12,7 @@ export default class FileAvatar extends File {
     static MIME_TYPES = {
         'image/jpg': 'jpg',
         'image/jpeg': 'jpg',
-        'image/png': 'png',
+        'image/png': 'jpg',
     };
 
     constructor() {
