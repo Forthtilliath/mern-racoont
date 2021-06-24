@@ -1,17 +1,13 @@
 export default class File {
     /** Nom du champ envoyé par le formulaire */
-    static postName = 'profile';
+    static postName = '';
     /** Chemin du fichier enregistré sur le serveur */
-    static path = './client/public/uploads/profile';
+    static path = '';
     /** Chemin du fichier pour y accéder par le client */
-    static pathClient = './uploads/profile';
+    static pathClient = '';
 
     /** Liste des types de fichiers acceptés */
-    static MIME_TYPES = {
-        'image/jpg': 'jpg',
-        'image/jpeg': 'jpg',
-        'image/png': 'png',
-    };
+    static MIME_TYPES = {};
 
     /**
      * Utilisé lors du remplacement du nom temporaire par le nom final.
@@ -65,8 +61,8 @@ export default class File {
      * Génère l'url de l'image pour le frontside
      * @param {Request} req
      */
-    static getUrl(req) {
-        return this.pathClient + '/' + this.rename(req.file.filename);
+    static getUrl(filename) {
+        return this.pathClient + '/' + this.rename(filename);
     }
 
     // static remove(id) {

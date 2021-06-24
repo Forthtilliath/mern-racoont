@@ -1,9 +1,9 @@
 import multer from 'multer';
-import File from '../utils/file.utils.js';
+import FileAvatar from '../utils/file.avatar.utils.js';
 
 const fileFilter = (_req, file, callback) => {
     // Si le mime du fichier ne correspond pas à l'un attendu
-    if (!File.checkMime(file.mimetype)) {
+    if (!FileAvatar.checkMime(file.mimetype)) {
         return callback(null, false);
     }
     callback(null, true);
@@ -11,13 +11,13 @@ const fileFilter = (_req, file, callback) => {
 
 const storage = new multer.diskStorage({
     destination: (_req, _file, callback) => {
-        callback(null, File.path);
+        callback(null, FileAvatar.path);
     },
     filename: (req, file, callback) => {
-        callback(null, File.nameForTemp(req.body.userId, file.mimetype));
+        callback(null, FileAvatar.nameForTemp(req.body.userId, file.mimetype));
     },
 });
 
 export default multer({ fileFilter: fileFilter, storage: storage }).single(
-    File.postName,
+    FileAvatar.postName,
 );

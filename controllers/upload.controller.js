@@ -1,13 +1,15 @@
 import UserModel from '../models/User.model.js';
-import File from '../utils/file.utils.js';
+import FileAvatar from '../utils/file.avatar.utils.js';
 
 export default {
     uploadProfile: async (req, res) => {
         if (req.file.filename) {
             try {
+                console.log("userid",req.body.userId);
+                console.log("file",FileAvatar.getUrl(req.file.filename));
                 await UserModel.findByIdAndUpdate(
                     req.body.userId,
-                    { picture: File.getUrl(req.file.filename) },
+                    { picture: FileAvatar.getUrl(req.file.filename) },
                     { new: true, upsert: true, setDefaultsOnInsert: true },
                     (err, docs) => {
                         if (!err) return res.status(200).json(docs);

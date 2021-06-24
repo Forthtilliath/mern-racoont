@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs';
-import File from '../utils/file.utils.js';
+import FileAvatar from '../utils/file.avatar.utils.js';
 
 const sizeMax = 500;
 const qualityMax = 50;
@@ -15,7 +15,7 @@ export default async (req, res, next) => {
                 path.resolve(
                     req.file.destination,
                     '',
-                    File.rename(req.file.filename),
+                    FileAvatar.rename(req.file.filename),
                 ),
             );
         fs.unlinkSync(req.file.path);
