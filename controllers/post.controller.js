@@ -1,6 +1,7 @@
 import UserModel from '../models/User.model.js';
 import PostModel from '../models/Post.model.js';
 import mongoose from 'mongoose';
+import FilePost from '../utils/file.post.utils.js';
 const ObjectId = mongoose.Types.ObjectId;
 
 export default {
@@ -22,8 +23,15 @@ export default {
      * [video] Lien de la video lié au post
      */
     createPost: async (req, res) => {
+        let fileName;
+
+        if (req.file !== null) {
+            
+        }
+
         const newPost = new PostModel({
             ...req.body,
+            picture: req.file !== null ? FilePost.getUrl(req.file.filename) : "",
             likers: [],
             comments: [],
         });

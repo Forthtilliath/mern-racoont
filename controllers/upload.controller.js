@@ -5,8 +5,6 @@ export default {
     uploadProfile: async (req, res) => {
         if (req.file.filename) {
             try {
-                console.log("userid",req.body.userId);
-                console.log("file",FileAvatar.getUrl(req.file.filename));
                 await UserModel.findByIdAndUpdate(
                     req.body.userId,
                     { picture: FileAvatar.getUrl(req.file.filename) },
