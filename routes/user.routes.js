@@ -27,6 +27,29 @@ router.patch('/unfollow/:id', userController.unfollow);
  * Les autres données que le fichier doivent être mise avant le fichier
  * sinon elles ne sont pas envoyées !
  */
-router.post('/upload', multer, sharp, uploadController.uploadProfil);
+function verif(req, res, err) {
+
+        // FILE SIZE ERROR
+        if (err instanceof multer.MulterError) {
+            return res.end("Max file size 2MB allowed!");
+        }
+
+        // INVALID FILE TYPE, message will return from fileFilter callback
+        else if (err) {
+            return res.end(err.message);
+        }
+
+        // FILE NOT SELECTED
+        else if (!req.file) {
+            return res.end("File is required!");
+        }
+ 
+        // SUCCESS
+        else {
+            console.log("File uploaded successfully!");
+            console.log("File response", req.file);
+        }
+}
+router.post('/upload', multer, sharp, uploadController.uploadProfile);
 
 export default router;

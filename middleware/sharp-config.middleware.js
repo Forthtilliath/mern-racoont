@@ -6,7 +6,7 @@ import File from '../utils/file.utils.js';
 const sizeMax = 500;
 const qualityMax = 50;
 
-export default async (req, _res, next) => {
+export default async (req, res, next) => {
     if (req.file) {
         await sharp(req.file.path)
             .resize(sizeMax)

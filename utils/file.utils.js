@@ -29,6 +29,10 @@ export default class File {
         //
     }
 
+    static checkMime(mimetype) {
+        return this.MIME_TYPES.hasOwnProperty(mimetype);
+    }
+
     /**
      * Rename an image file with timestamp
      * @param {String} originalname

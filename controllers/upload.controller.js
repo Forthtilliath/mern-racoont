@@ -2,7 +2,7 @@ import UserModel from '../models/User.model.js';
 import File from '../utils/file.utils.js';
 
 export default {
-    uploadProfil: async (req, res) => {
+    uploadProfile: async (req, res) => {
         if (req.file.filename) {
             try {
                 await UserModel.findByIdAndUpdate(
