@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema(
         pseudo: {
             type: String,
             required: true,
-            minLength: 3,
-            maxLength: 55,
+            minlength: 3,
+            maxlength: 55,
             unique: true,
             trim: true,
         },
@@ -55,20 +55,17 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-// userSchema.pre('save', function (next) {
-//     return new Promise((resolve, reject) => {
-//         bcrypt.hash(this.password, 12, (error, hashedPassword) => {
-//             if (error) {
-//                 reject(error);
-//             } else {
-//                 this.password = hashedPassword;
-//                 next();
-//                 resolve();
-//             }
-//         });
-//     });
-// });
-
+userSchema.statics.login = async function (email, password) {
+    const user = await this.findOne({ email });
+    if (user) {
+        const auth = await bcrypt.compare(password, user.password);
+        if (auth) {
+            return user;
+        }
+        throw { status: 401, message: 'Pseudo ou mot de passe incorrect !' }; // Mot de passe
+    }
+    throw { status: 401, message: 'Pseudo ou mot de passe incorrect !' }; // Pseudo
+};
 const UserModel = mongoose.model('user', userSchema);
 
 export default UserModel;

@@ -1,26 +1,28 @@
 import dotenv from 'dotenv';
 dotenv.config({ path: './config/.env' });
+import cookieParser from 'cookie-parser';
 
 import './config/database.js';
 import express from 'express';
+
+import auth from './middleware/auth.middleware.js';
+
 import userRoutes from './routes/user.route.js';
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
-
-
-
-
-
-
-
+// jwt
+app.get('*', auth.checkUser);
+app.get('/jwtid', auth.requireAuth, (req, res) => {
+    res.status(200).send(res.locals.user._id);
+});
 
 // routes
 app.use('/api/user', userRoutes);
-
 
 // server
 app.listen(process.env.PORT, () => {

@@ -48,7 +48,7 @@ export default {
                     if (!err) res.status(200).json(docs);
                     return res.status(500).json({ message: err });
                 },
-            );
+            ).select('-password');
         } catch (e) {
             return res.status(500).json({ message: err });
         }
@@ -74,7 +74,7 @@ export default {
      * Suit un nouvel utilisateur
      * @param {String} id Identifiant d'un utilisateur
      * @param {String} idToFollow Identifiant de l'utilisation à suivre
-     * @returns {{message: {follower:UserModel, followed:UserModel}}} Renvoit un objet contenant
+     * @returns {{message: {follower:UserModel, followed:UserModel}}} Renvoit un objet contenant l'objet du suiveur et du suivi
      */
     follow: async (req, res) => {
         if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
@@ -89,29 +89,26 @@ export default {
             await UserModel.findByIdAndUpdate(
                 req.params.id,
                 {
-                    $push: {
-                        following: req.body.idToFollow,
-                    },
+                    // Ajoute seulement si pas déjà dans le tableau
+                    $addToSet: { following: req.body.idToFollow },
                 },
                 { new: true, upsert: true },
                 (err, docs) => {
                     if (err) return res.status(500).json({ message: err });
                     message.follower = docs;
                 },
-            );
+            ).select('-password');
             await UserModel.findByIdAndUpdate(
                 req.body.idToFollow,
                 {
-                    $push: {
-                        followers: req.params.id,
-                    },
+                    $addToSet: { followers: req.params.id },
                 },
                 { new: true, upsert: true },
                 (err, docs) => {
                     if (err) return res.status(500).json({ message: err });
                     message.followed = docs;
                 },
-            );
+            ).select('-password');
             res.status(201).json(message);
         } catch (e) {
             return res.status(500).json({ message: err });
@@ -122,7 +119,7 @@ export default {
      * Annule le suivi d'un utilisateur
      * @param {String} id Identifiant d'un utilisateur
      * @param {String} idToUnfollow Identifiant de l'utilisation à suivre
-     * @returns {{message: {unfollower:UserModel, unfollowed:UserModel}}} Renvoit un objet contenant
+     * @returns {{message: {unfollower:UserModel, unfollowed:UserModel}}} Renvoit un objet contenant l'objet du non-suiveur et du non-suivi
      */
     unfollow: async (req, res) => {
         if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
@@ -131,8 +128,8 @@ export default {
 
         try {
             let message = {
-                unfollower: '', // Celui qui suit
-                unfollowed: '', // Celui qui est suivit !
+                unfollower: '', // Celui qui ne suit plus
+                unfollowed: '', // Celui qui n'est plus suivit !
             };
             await UserModel.findByIdAndUpdate(
                 req.params.id,
