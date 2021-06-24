@@ -1,6 +1,7 @@
 import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs';
+import File from '../utils/file.utils.js';
 
 const sizeMax = 500;
 const qualityMax = 50;
@@ -14,7 +15,7 @@ export default async (req, _res, next) => {
                 path.resolve(
                     req.file.destination,
                     '',
-                    req.file.filename.replace('_temp', ''),
+                    File.rename(req.file.filename),
                 ),
             );
         fs.unlinkSync(req.file.path);

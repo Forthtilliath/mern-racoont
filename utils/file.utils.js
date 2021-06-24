@@ -12,14 +12,18 @@ export default class File {
     static postName = 'profile'; // Nom du champ envoyé en post
 
     static path = {
-        profile: './client/public/uploads/profile',
+        profile: './client/public/uploads/profile/',
+    };
+
+    static pathClient = {
+        profile: './uploads/profile/',
     };
 
     // Pour le replace du nom
     static filename = {
         from: '_temp',
-        to: ''
-    }
+        to: '',
+    };
 
     constructor() {
         //
@@ -29,15 +33,13 @@ export default class File {
      * Rename an image file with timestamp
      * @param {String} originalname
      */
-    static rename(originalname, mimetype, userId) {
-
-        const name = originalname
-            .replace(/ /g, '_')
-            .substring(0, originalname.lastIndexOf('.'));
+    static nameForTemp(userId, mimetype) {
         const extension = this.MIME_TYPES[mimetype];
+        return userId + '_temp.' + extension;
+    }
 
-        const newName = userId + '_temp.' + extension;
-        return newName;
+    static rename(filename) {
+        return filename.replace(this.filename.from, this.filename.to);
     }
 
     /**

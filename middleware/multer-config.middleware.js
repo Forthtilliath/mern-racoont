@@ -6,11 +6,8 @@ const storage = new multer.diskStorage({
         callback(null, File.path.profile);
     },
     filename: (req, file, callback) => {
-        callback(
-            null,
-            File.rename(file.originalname, file.mimetype, req.body.id),
-        );
+        callback(null, File.nameForTemp(req.body.userId, file.mimetype));
     },
 });
 
-export default multer({storage:storage}).single(File.postName);
+export default multer({ storage: storage }).single(File.postName);
