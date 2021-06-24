@@ -1,4 +1,9 @@
 export default {
+    /**
+     * Retourne un objet erreur simplifié
+     * @param {{}} err Objet error généré par Mongoose
+     * @returns {{pseudo:String, email:String, password:String}}
+     */
     signUpErrors: (err) => {
         let errors = { pseudo: '', email: '', password: '' };
 

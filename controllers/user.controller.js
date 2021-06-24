@@ -1,4 +1,4 @@
-import UserModel from '../models/user.model.js';
+import UserModel from '../models/User.model.js';
 import mongoose from 'mongoose';
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -18,11 +18,17 @@ export default {
      * @returns {UserModel} Objet de User
      */
     userInfos: (req, res) => {
-        if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
+        if (!ObjectId.isValid(req.params.id))
+            return res
+                .status(400)
+                .json({ message: 'ID unknown : ' + req.params.id });
 
         UserModel.findById(req.params.id, (err, docs) => {
             if (docs) res.status(200).json(docs);
-            else res.status(400).json({ message: '!!!ID unknown : ' + (err ? err : req.params.id) });
+            else
+                res.status(400).json({
+                    message: '!!!ID unknown : ' + (err ? err : req.params.id),
+                });
         }).select('-password');
     },
 
@@ -33,7 +39,10 @@ export default {
      * @returns {UserModel} Objet de User
      */
     updateUser: async (req, res) => {
-        if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
+        if (!ObjectId.isValid(req.params.id))
+            return res
+                .status(400)
+                .json({ message: 'ID unknown : ' + req.params.id });
 
         try {
             await UserModel.findByIdAndUpdate(
@@ -60,7 +69,10 @@ export default {
      * @returns {{message:String}}
      */
     deleteUser: async (req, res) => {
-        if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
+        if (!ObjectId.isValid(req.params.id))
+            return res
+                .status(400)
+                .json({ message: 'ID unknown : ' + req.params.id });
 
         try {
             await UserModel.findByIdAndRemove(req.params.id).exec();
@@ -77,9 +89,14 @@ export default {
      * @returns {{message: {follower:UserModel, followed:UserModel}}} Renvoit un objet contenant l'objet du suiveur et du suivi
      */
     follow: async (req, res) => {
-        if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
+        if (!ObjectId.isValid(req.params.id))
+            return res
+                .status(400)
+                .json({ message: 'ID unknown : ' + req.params.id });
         if (!ObjectId.isValid(req.body.idToFollow))
-            return res.status(400).json({ message: 'ID unknown : ' + req.body.idToFollow });
+            return res
+                .status(400)
+                .json({ message: 'ID unknown : ' + req.body.idToFollow });
 
         try {
             let message = {
@@ -88,10 +105,8 @@ export default {
             };
             await UserModel.findByIdAndUpdate(
                 req.params.id,
-                {
-                    // Ajoute seulement si pas déjà dans le tableau
-                    $addToSet: { following: req.body.idToFollow },
-                },
+                // addToSet: Ajoute seulement si pas déjà dans le tableau
+                { $addToSet: { following: req.body.idToFollow } },
                 { new: true, upsert: true },
                 (err, docs) => {
                     if (err) return res.status(500).json({ message: err });
@@ -100,9 +115,7 @@ export default {
             ).select('-password');
             await UserModel.findByIdAndUpdate(
                 req.body.idToFollow,
-                {
-                    $addToSet: { followers: req.params.id },
-                },
+                { $addToSet: { followers: req.params.id } },
                 { new: true, upsert: true },
                 (err, docs) => {
                     if (err) return res.status(500).json({ message: err });
@@ -122,9 +135,14 @@ export default {
      * @returns {{message: {unfollower:UserModel, unfollowed:UserModel}}} Renvoit un objet contenant l'objet du non-suiveur et du non-suivi
      */
     unfollow: async (req, res) => {
-        if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
+        if (!ObjectId.isValid(req.params.id))
+            return res
+                .status(400)
+                .json({ message: 'ID unknown : ' + req.params.id });
         if (!ObjectId.isValid(req.body.idToUnfollow))
-            return res.status(400).json({ message: 'ID unknown : ' + req.body.idToUnfollow });
+            return res
+                .status(400)
+                .json({ message: 'ID unknown : ' + req.body.idToUnfollow });
 
         try {
             let message = {
@@ -133,11 +151,7 @@ export default {
             };
             await UserModel.findByIdAndUpdate(
                 req.params.id,
-                {
-                    $pull: {
-                        following: req.body.idToUnfollow,
-                    },
-                },
+                { $pull: { following: req.body.idToUnfollow } },
                 { new: true, upsert: true },
                 (err, docs) => {
                     if (err) return res.status(500).json({ message: err });
@@ -146,11 +160,7 @@ export default {
             );
             await UserModel.findByIdAndUpdate(
                 req.body.idToUnfollow,
-                {
-                    $pull: {
-                        followers: req.params.id,
-                    },
-                },
+                { $pull: { followers: req.params.id } },
                 { new: true, upsert: true },
                 (err, docs) => {
                     if (err) return res.status(500).json({ message: err });

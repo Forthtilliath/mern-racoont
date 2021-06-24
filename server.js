@@ -7,7 +7,8 @@ import express from 'express';
 
 import auth from './middleware/auth.middleware.js';
 
-import userRoutes from './routes/user.route.js';
+import userRoutes from './routes/user.routes.js';
+import postRoutes from './routes/post.routes.js';
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.get('/jwtid', auth.requireAuth, (req, res) => {
 
 // routes
 app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
 
 // server
 app.listen(process.env.PORT, () => {

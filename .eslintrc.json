@@ -15,7 +15,7 @@
     "rules": {
         "semi"                      : ["error", "always"],                                        // Les lignes doivent se terminer par ;
         "comma-dangle"              : ["error", "only-multiline"],                                // Le dernier élément d'un objet peut se terminer par ,
-        "max-len"                   : ["error", { "code": 120 }],                                 // Nombre max de caractères par ligne
+        "max-len"                   : ["error", { "code": 80 }],                                 // Nombre max de caractères par ligne
         "object-curly-spacing"      : ["error", "never", { "arraysInObjects": true }],            // Les valeurs d'un tableaux doivent être séparé d'un espace
         "computed-property-spacing" : ["error", "never", { "enforceForClassMembers": true }],     // Les valeurs d'un objet doivent être séparé d'un espace
         "for-direction"             : "error",                                                    // Evite les boucles 'pour' infinie

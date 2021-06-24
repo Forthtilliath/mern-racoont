@@ -66,6 +66,5 @@ userSchema.statics.login = async function (email, password) {
     }
     throw { status: 401, message: 'Pseudo ou mot de passe incorrect !' }; // Pseudo
 };
-const UserModel = mongoose.model('user', userSchema);
 
-export default UserModel;
+export default mongoose.model('user', userSchema);
