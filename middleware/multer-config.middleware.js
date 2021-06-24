@@ -11,7 +11,7 @@ const fileFilter = (_req, file, callback) => {
 
 const storage = new multer.diskStorage({
     destination: (_req, _file, callback) => {
-        callback(null, File.path.profile);
+        callback(null, File.path);
     },
     filename: (req, file, callback) => {
         callback(null, File.nameForTemp(req.body.userId, file.mimetype));

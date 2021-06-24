@@ -7,11 +7,7 @@ export default {
             try {
                 await UserModel.findByIdAndUpdate(
                     req.body.userId,
-                    {
-                        picture:
-                            File.pathClient.profile +
-                            File.rename(req.file.filename),
-                    },
+                    { picture: File.getUrl(req.file.filename) },
                     { new: true, upsert: true, setDefaultsOnInsert: true },
                     (err, docs) => {
                         if (!err) return res.status(200).json(docs);
