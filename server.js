@@ -1,9 +1,10 @@
 import dotenv from 'dotenv';
 dotenv.config({ path: './config/.env' });
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import express from 'express';
 
 import './config/database.js';
-import express from 'express';
 
 import auth from './middleware/auth.middleware.js';
 
@@ -12,13 +13,23 @@ import postRoutes from './routes/post.routes.js';
 
 const app = express();
 
+const corsOptions = {
+    origine: process.env.CLIENT_URL,
+    credential: true,
+    allowedHeaders: ['sessionId', 'Content-Type'],
+    exposedHeaders: ['sessionId'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+};
+
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
 // jwt
 app.get('*', auth.checkUser);
-app.get('/jwtid', auth.requireAuth, (req, res) => {
+app.get('/jwtid', auth.requireAuth, (_req, res) => {
     res.status(200).send(res.locals.user._id);
 });
 
