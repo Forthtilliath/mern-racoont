@@ -19,7 +19,7 @@ export default {
             res.status(201).json({ user: user._id });
         } catch (err) {
             const errors = error.signUpErrors(err);
-            res.status(400).json({ errors });
+            res.status(400).json({ message : errors });
         }
     },
 
@@ -32,7 +32,8 @@ export default {
             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAgeCookie });
             res.status(200).json({ user: user._id });
         } catch (err) {
-            if (typeof err === 'object') res.status(err.status).json({ err: err.message });
+            if (typeof err === 'object')
+                res.status(err.status).json({ message: err.message });
             else res.status(400).json({ err });
         }
     },

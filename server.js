@@ -14,8 +14,8 @@ import postRoutes from './routes/post.routes.js';
 const app = express();
 
 const corsOptions = {
-    origine: process.env.CLIENT_URL,
-    credential: true,
+    origin: process.env.CLIENT_URL,
+    credentials: true,
     allowedHeaders: ['sessionId', 'Content-Type'],
     exposedHeaders: ['sessionId'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
