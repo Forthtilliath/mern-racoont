@@ -37,7 +37,7 @@ export default {
                 }
             });
         } else {
-            console.log('No token');
+            console.log('No token !');
         }
     },
 };

@@ -22,7 +22,6 @@ const SignInForm = () => {
         })
             .then((res) => {
                 if (res.data.user) {
-                    console.log('Redirection');
                     window.location = '/';
                 }
 

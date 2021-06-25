@@ -8,16 +8,15 @@ function App() {
 
     useEffect(() => {
         const fetchToken = async () => {
-            await axios({
-                method: 'get',
-                url: `${process.env.REACT_APP_API_URL}/jwtid`,
-                withCredentials: true,
+            await axios.get(`${process.env.REACT_APP_API_URL}/jwtid`, {
+              withCredentials: true,
+              timeout:0
             })
                 .then((res) => setUid(res.data))
-                .catch((err) => console.log('No token'));
+                .catch((err) => console.log('No token', err));
         };
         fetchToken();
-    }, [uid]);
+    }, []);
 
     return (
         <UidContext.Provider value={uid}>

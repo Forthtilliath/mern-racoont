@@ -38,7 +38,7 @@ export default {
         }
     },
 
-    logout: (req, res) => {
+    logout: (_req, res) => {
         res.cookie('jwt', '', { maxAge: 1 });
         res.redirect('/');
     },
