@@ -91,7 +91,11 @@ export default function UpdateProfile() {
                                             alt="user-pic"
                                         />
                                         <h4>{user.pseudo}</h4>
-                                        <FollowHandler />
+                                        <div className="follow-handler">
+                                            <FollowHandler
+                                                idToFollow={user._id}
+                                            />
+                                        </div>
                                     </li>
                                 ) : (
                                     <></>
@@ -122,7 +126,11 @@ export default function UpdateProfile() {
                                             alt="user-pic"
                                         />
                                         <h4>{user.pseudo}</h4>
-                                        <FollowHandler />
+                                        <div className="follow-handler">
+                                            <FollowHandler
+                                                idToFollow={user._id}
+                                            />
+                                        </div>
                                     </li>
                                 ) : (
                                     <></>
