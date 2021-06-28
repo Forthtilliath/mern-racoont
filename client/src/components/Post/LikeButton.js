@@ -45,6 +45,7 @@ const LikeButton = ({ post }) => {
                     alt="unlike"
                 />
             )}
+            <span>{post.likers.length}</span>
         </div>
     );
 };
