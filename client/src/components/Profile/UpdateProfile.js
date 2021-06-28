@@ -94,6 +94,7 @@ export default function UpdateProfile() {
                                         <div className="follow-handler">
                                             <FollowHandler
                                                 idToFollow={user._id}
+                                                type={'suggestion'}
                                             />
                                         </div>
                                     </li>
@@ -129,6 +130,7 @@ export default function UpdateProfile() {
                                         <div className="follow-handler">
                                             <FollowHandler
                                                 idToFollow={user._id}
+                                                type={'suggestion'}
                                             />
                                         </div>
                                     </li>
