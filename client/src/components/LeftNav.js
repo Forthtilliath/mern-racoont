@@ -1,7 +1,7 @@
-import React from 'react'
-import {NavLink} from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-export default function LeftNav() {
+const LeftNav = () => {
     return (
         <div className="left-nav-container">
             <div className="icons">
@@ -15,19 +15,20 @@ export default function LeftNav() {
                         exact
                         activeClassName="active-left-nav"
                     >
-                        <img src="./img/icons/rocket.svg" alt="trending" />
+                        <img src="./img/icons/rocket.svg" alt="home" />
                     </NavLink>
                     <br />
                     <NavLink
-                        to="/profile"
+                        to="/profil"
                         exact
                         activeClassName="active-left-nav"
                     >
-                        <img src="./img/icons/user.svg" alt="profile" />
+                        <img src="./img/icons/user.svg" alt="home" />
                     </NavLink>
-                    <br />
                 </div>
             </div>
         </div>
     );
-}
+};
+
+export default LeftNav;
