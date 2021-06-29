@@ -13,6 +13,29 @@ const NewPostForm = () => {
 
     const handlePicture = (e) => {};
 
+    const getYoutubeIdVideo = (word) => {
+        const regExp =
+            /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = word.match(regExp);
+
+        return match && match[2].length === 11 ? match[2] : null;
+    };
+
+    const handleVideo = React.useCallback(() => {
+        let words = message.split(' ');
+        for (let [key, word] of Object.entries(words)) {
+            console.log('word', word);
+            let idVideo = getYoutubeIdVideo(word);
+            if (idVideo) {
+                setVideo('//www.youtube.com/embed/' + idVideo);
+                words.splice(key, 1);
+                setMessage(words.join(' '));
+                setPostPicture('');
+                return;
+            }
+        }
+    }, [message]);
+
     const handlePost = (e) => {};
 
     const cancelPost = (e) => {
@@ -26,7 +49,8 @@ const NewPostForm = () => {
 
     useEffect(() => {
         !isEmpty(userData) && setIsLoading(false);
-    }, [userData]);
+        handleVideo();
+    }, [userData, message, handleVideo]);
 
     return (
         <div className="post-container">
@@ -94,7 +118,7 @@ const NewPostForm = () => {
                                         {video && (
                                             <iframe
                                                 src={video}
-                                                frameborder="0"
+                                                frameBorder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowFullScreen
                                                 title={video}
