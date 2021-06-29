@@ -26,7 +26,6 @@ export const getPosts = (nb) => {
 
 export const addPost = (data) => {
     return (dispatch) => {
-    console.log('post2');
         return axios.post(`${process.env.REACT_APP_API_URL}/api/post`, data).then((res=>console.log(res)));
     };
 };

@@ -16,9 +16,7 @@ const NewPostForm = () => {
     const hasContent = () => message || postPicture || video.length === 35;
 
     const handlePost = async (e) => {
-        console.log('handlepost');
         if (hasContent()) {
-        console.log('has content');
             const data = new FormData();
             data.append('posterId', userData._id);
             data.append('message', message);

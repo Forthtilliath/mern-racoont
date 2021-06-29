@@ -33,7 +33,6 @@ export default {
         }
     },
     post: async (req, res, next) => {
-        console.log(req.file);
         if (req.file) {
             await compress(req.file, postSettings);
             fs.unlinkSync(req.file.path);

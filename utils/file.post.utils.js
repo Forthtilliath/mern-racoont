@@ -30,10 +30,6 @@ export default class FilePost extends File {
      */
     static nameForTemp(userId, mimetype) {
         const extension = this.MIME_TYPES[mimetype];
-        console.log(
-            'new name',
-            userId + '_' + Date.now() + this.filename.from + '.' + extension,
-        );
         return userId + '_' + Date.now() + this.filename.from + '.' + extension;
     }
 }
