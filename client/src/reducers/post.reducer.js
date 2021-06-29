@@ -1,5 +1,7 @@
 import {
+    DELETE_COMMENT,
     DELETE_POST,
+    EDIT_COMMENT,
     GET_POSTS,
     LIKE_POST,
     UNLIKE_POST,
@@ -43,6 +45,30 @@ export default function postReducer(state = initialState, action) {
             });
         case DELETE_POST:
             return state.filter((post) => post._id !== action.payload.postId);
+        case EDIT_COMMENT:
+            return state.map((post) => {
+                return post._id === action.payload.postId
+                    ? {
+                          ...post,
+                          comments: post.comments.map((comment) => {
+                              return comment._id === action.payload.commentId
+                                  ? { ...comment, text: action.payload.text }
+                                  : comment;
+                          }),
+                      }
+                    : post;
+            });
+        case DELETE_COMMENT:
+            return state.map((post) => {
+                return post._id === action.payload.postId
+                    ? {
+                        ...post,
+                        comments: post.comments.filter(
+                            (comment) => comment._id !== action.payload.commentId,
+                        ),
+                    }
+                    : post;
+            });
         default:
             return state;
     }

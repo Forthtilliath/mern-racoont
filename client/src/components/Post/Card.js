@@ -2,21 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateParser, isEmpty } from '../Utils';
 import FollowHandler from '../Profile/FollowHandler';
+import { updatePost } from '../../actions/post.actions';
 import LikeButton from './LikeButton';
 import DeleteCard from './DeleteCard';
-import { updatePost } from '../../actions/post.actions';
+import CardComments from './CardComments';
 
 const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdated, setIsUpdated] = useState(false);
-    const [textUpdate, setTextUpdate] = useState(null);
+    const [textUpdate, setTextUpdate] = useState('');
+    const [showComments, setShowComments] = useState(false);
     const usersData = useSelector((state) => state.usersReducer);
     const userData = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
 
     const updateItem = () => {
         if (textUpdate) {
-            dispatch(updatePost(post._id, textUpdate))
+            dispatch(updatePost(post._id, textUpdate));
         }
         setIsUpdated(false);
     };
@@ -108,13 +110,16 @@ const Card = ({ post }) => {
                                         src="./img/icons/edit.svg"
                                         alt="modifier"
                                     />
-                                    </div>
-                                    <DeleteCard id={post._id} />
+                                </div>
+                                <DeleteCard id={post._id} />
                             </div>
                         )}
                         <div className="card-footer">
                             <div className="comment-icon">
                                 <img
+                                    onClick={() =>
+                                        setShowComments(!showComments)
+                                    }
                                     src="./img/icons/message1.svg"
                                     alt="comment"
                                 />
@@ -123,6 +128,7 @@ const Card = ({ post }) => {
                             <LikeButton post={post} />
                             <img src="./img/icons/share.svg" alt="partager" />
                         </div>
+                        {showComments && <CardComments post={post} />}
                     </div>
                 </>
             )}

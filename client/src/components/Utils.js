@@ -1,4 +1,9 @@
 export const dateParser = (date) => {
+    let timestamp = Date.parse(date);
+    return timestampParse(timestamp);
+};
+
+export const timestampParse = (timestamp) => {
     let options = {
         hour: '2-digit',
         minute: '2-digit',
@@ -9,10 +14,7 @@ export const dateParser = (date) => {
         day: 'numeric',
     };
 
-    let timestamp = Date.parse(date);
-
-    return new Date(timestamp).toLocaleDateString('fr-FR', options).toString();
-};
+    return new Date(timestamp).toLocaleDateString('fr-FR', options).toString();};
 
 export const isEmpty = (value) => {
     return (
