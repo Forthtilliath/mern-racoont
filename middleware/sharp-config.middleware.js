@@ -3,33 +3,8 @@ import path from 'path';
 import fs from 'fs';
 import File from '../utils/file.utils.js';
 
-const sizeMax = 500;
-const qualityMax = 50;
-
 const avatarSettings = { sizeMax: 500, qualityMax: 50 };
 const postSettings = { sizeMax: 2000, qualityMax: 50 };
-
-// export default async (req, res, next) => {
-//     if (req.file) {
-//         await sharp(req.file.path)
-//             .resize(sizeMax)
-//             .jpeg({ quality: qualityMax })
-//             .toFile(
-//                 path.resolve(
-//                     req.file.destination,
-//                     '',
-//                     File.rename(req.file.filename),
-//                 ),
-//             );
-//         fs.unlinkSync(req.file.path);
-
-//         next();
-//     } else {
-//         res.status(500).json({
-//             error: "Erreur lors de l'enregistrement de l'image.",
-//         });
-//     }
-// };
 
 const compress = (file, settings) => {
     return sharp(file.path)
@@ -58,15 +33,18 @@ export default {
         }
     },
     post: async (req, res, next) => {
+        console.log(req.file);
         if (req.file) {
             await compress(req.file, postSettings);
             fs.unlinkSync(req.file.path);
 
             next();
         } else {
-            res.status(500).json({
-                error: "Erreur lors de l'enregistrement de l'image.",
-            });
+            // res.status(500).json({
+            //     error: "Erreur lors de l'enregistrement de l'image.",
+            // });
+
+            next();
         }
     },
 };

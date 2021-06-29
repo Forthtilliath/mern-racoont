@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty, timestampParser } from '../Utils';
 import { NavLink } from 'react-router-dom';
+import { addPost, getPosts } from '../../actions/post.actions';
 
 const NewPostForm = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -10,8 +11,33 @@ const NewPostForm = () => {
     const [video, setVideo] = useState('');
     const [file, setFile] = useState('');
     const userData = useSelector((state) => state.userReducer);
+    const dispatch = useDispatch();
 
-    const handlePicture = (e) => {};
+    const hasContent = () => message || postPicture || video.length === 35;
+
+    const handlePost = async (e) => {
+        console.log('handlepost');
+        if (hasContent()) {
+        console.log('has content');
+            const data = new FormData();
+            data.append('posterId', userData._id);
+            data.append('message', message);
+            if (file) data.append('image', file);
+            data.append('video', video);
+
+            await dispatch(addPost(data));
+            dispatch(getPosts())
+            cancelPost();
+        } else {
+            alert('Veuillez entrer un message');
+        }
+    };
+
+    const handlePicture = (e) => {
+        setPostPicture(URL.createObjectURL(e.target.files[0]));
+        setFile(e.target.files[0]);
+        setVideo('');
+    };
 
     const getYoutubeIdVideo = (word) => {
         const regExp =
@@ -24,7 +50,6 @@ const NewPostForm = () => {
     const handleVideo = React.useCallback(() => {
         let words = message.split(' ');
         for (let [key, word] of Object.entries(words)) {
-            console.log('word', word);
             let idVideo = getYoutubeIdVideo(word);
             if (idVideo) {
                 setVideo('//www.youtube.com/embed/' + idVideo);
@@ -36,16 +61,12 @@ const NewPostForm = () => {
         }
     }, [message]);
 
-    const handlePost = (e) => {};
-
     const cancelPost = (e) => {
         setMessage('');
         setPostPicture('');
         setVideo('');
         setFile('');
     };
-
-    const hasContent = () => message || postPicture || video.length > 20;
 
     useEffect(() => {
         !isEmpty(userData) && setIsLoading(false);
@@ -139,7 +160,7 @@ const NewPostForm = () => {
                                         <input
                                             type="file"
                                             name="image"
-                                            id="image"
+                                            id="file-upload"
                                             accept=".jpg, .jpeg, .png"
                                             onChange={handlePicture}
                                         />
