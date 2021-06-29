@@ -1,9 +1,9 @@
 export const dateParser = (date) => {
     let timestamp = Date.parse(date);
-    return timestampParse(timestamp);
+    return timestampParser(timestamp);
 };
 
-export const timestampParse = (timestamp) => {
+export const timestampParser = (timestamp) => {
     let options = {
         hour: '2-digit',
         minute: '2-digit',
