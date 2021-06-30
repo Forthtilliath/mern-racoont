@@ -5,8 +5,11 @@ import LeftNav from '../components/LeftNav';
 import Card from '../components/Post/Card';
 import Trends from '../components/Trends';
 import { isEmpty } from '../components/Utils';
+import FriendsHint from '../components/Profile/FriendsHint';
 
 const Trending = () => {
+    // si on retire la ligne, les likes etc ne fonctionnent plus
+    // eslint-disable-next-line no-unused-vars
     const uid = useContext(UidContext);
     const trendList = useSelector((state) => state.trendingReducer);
 
@@ -24,6 +27,7 @@ const Trending = () => {
             <div className="right-side">
                 <div className="right-side-container">
                     <Trends />
+                    {uid && <FriendsHint />}
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import NewPostForm from '../components/Post/NewPostForm';
 import Thread from '../components/Thread';
 import Log from '../components/Log/Log';
 import Trends from '../components/Trends';
+import FriendsHint from '../components/Profile/FriendsHint';
 
 // TODO https://codepen.io/forthtilliath/pen/poPoEKR
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
                 <div className="right-side-container">
                     <div className="wrapper">
                         <Trends />
+                        {uid && <FriendsHint />}
                     </div>
                 </div>
             </div>
