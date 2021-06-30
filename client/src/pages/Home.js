@@ -4,6 +4,7 @@ import LeftNav from '../components/LeftNav';
 import NewPostForm from '../components/Post/NewPostForm';
 import Thread from '../components/Thread';
 import Log from '../components/Log/Log';
+import Trends from '../components/Trends';
 
 // TODO https://codepen.io/forthtilliath/pen/poPoEKR
 const Home = () => {
@@ -17,6 +18,13 @@ const Home = () => {
                     {uid ? <NewPostForm /> : <Log signin={true} />}
                 </div>
                 <Thread />
+            </div>
+            <div className="right-side">
+                <div className="right-side-container">
+                    <div className="wrapper">
+                        <Trends />
+                    </div>
+                </div>
             </div>
         </div>
     );

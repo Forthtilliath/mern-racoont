@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import App from './App';
 import { getUsers } from './actions/users.actions';
+import { getPosts } from './actions/post.actions';
 import './styles/index.scss';
 
 // dev tools
@@ -17,6 +18,7 @@ const store = createStore(
 );
 
 store.dispatch(getUsers());
+store.dispatch(getPosts());
 
 ReactDOM.render(
     <Provider store={store}>

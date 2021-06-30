@@ -30,6 +30,10 @@ Malgré l'envergure du projet, je n'ai pas rencontré de réels problèmes. Les 
 
 ## Gestion optimale des images
 
-## Rendre possible le partage
+## Rendre possible le partage via widgets
 
 ## Avoir une page avec uniquement ses posts
+
+## Optimiser le thread
+
+Récup post from allposts

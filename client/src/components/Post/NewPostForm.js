@@ -16,7 +16,7 @@ const NewPostForm = () => {
 
     const hasContent = () => message || postPicture || video.length === 35;
 
-    const handlePost = async (e) => {
+    const handlePost = (e) => {
         if (hasContent()) {
             const data = new FormData();
             data.append('posterId', userData._id);
@@ -24,7 +24,7 @@ const NewPostForm = () => {
             if (file) data.append('image', file);
             data.append('video', video);
 
-            await dispatch(addPost(data));
+            dispatch(addPost(data));
             dispatch(getPosts())
             cancelPost();
         } else {
