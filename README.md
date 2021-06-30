@@ -18,3 +18,18 @@ Après quelques petits projet pour prendre en main Réact, ce projet va me perme
 
 Ce projet utilise Redux. Je ne sais pas du tout ce qu'il fait et à quoi il sert. J'en ai pas mal entendu parler. Ca sera donc l'occasion de découvrir tout ca.
 
+# Problèmes rencontrés
+
+Malgré l'envergure du projet, je n'ai pas rencontré de réels problèmes. Les problèmes que j'ai mis le plus de temps à corriger étaient dûs à des erreurs des plus idiotes (par exemple, un Reducer qui n'avait pas le bon nom lors de la combinaison des réducers).
+
+# Ce que m'a apporté ce projet
+
+# Améliorations possibles
+
+## Mode sombre
+
+## Gestion optimale des images
+
+## Rendre possible le partage
+
+## Avoir une page avec uniquement ses posts
