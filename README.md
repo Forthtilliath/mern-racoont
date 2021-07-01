@@ -95,6 +95,8 @@ Lors de projets précédents, j'ai découvert des librairies pour améliorer la 
 J'avais aussi utilisé deux middlewares qui permettaient de ne pas conserver de cache. Etant une application one-page, l'utilisateur n'aura qu'un chargement au cours de sa navigation, donc autant s'assurer que l'utilisateur ait une version à jour du site.<br/>
 De plus, il est possible de compresser les données afin que cela soit plus rapide à charger. Un bon moyen de contre-balancer le fait de ne pas avoir de cache.
 
+Il est aussi possible d'encoder l'email afin que dans le cas où celui ci est récupéré par des personnes mal intentionnées, l'email ne leur soit pas montré en clair.
+
 https://www.npmjs.com/package/react-helmet
 
 # Améliorations apportées
@@ -103,7 +105,12 @@ https://www.npmjs.com/package/react-helmet
 
 Dans le but d'améliorer la sécurité et optimiser les performances, j'ai mis en place 3 middlewares, helmet, nocache et compression.
 
-J'ai aussi légèrement augmenter le salt pour l'encodage du mot de passe
+J'ai aussi légèrement augmenter le salt pour l'encodage du mot de passe car plus les années passent, plus les ordinateurs/serveurs sont puissants, et plus il est rapide de générer un mot de passe encodé, ainsi que de tenter de les crackers. 
+
+Afin d'optimiser la place occupée par les images que les utilisateurs uploads, j'ai installé un middleware pour les compresser. J'utilise sharp pour faire ceci. J'ai configuré pour que les images du profil soient redimmentionnée à maximum 180px en hauteur et largeur (la taille la plus grosse affichée sur le site sur le profil), et soit compressé de 50%.<br/>
+Les images des posts sont quant à elle réduite à 2000px et compressées de 50%.
+
+Ces réglages sont facilement modifiables via le fichier env.
 
 # Screenshots du projet
 

@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import File from '../utils/file.utils.js';
 
-const avatarSettings = { sizeMax: 500, qualityMax: 50 };
+const avatarSettings = { sizeMax: 180, qualityMax: 50 };
 const postSettings = { sizeMax: 2000, qualityMax: 50 };
 
 const compress = (file, settings) => {
