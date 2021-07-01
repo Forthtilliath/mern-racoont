@@ -103,4 +103,16 @@ https://www.npmjs.com/package/react-helmet
 
 Dans le but d'améliorer la sécurité et optimiser les performances, j'ai mis en place 3 middlewares, helmet, nocache et compression.
 
+J'ai aussi légèrement augmenter le salt pour l'encodage du mot de passe
+
 # Screenshots du projet
+
+### Thread
+![thread](/screenshots/thread.png)
+
+### Profil
+![profil](/screenshots/profil.png)
+![abonnements](/screenshots/abonnements.png)
+
+### Trending
+![trending](/screenshots/trending.png)
