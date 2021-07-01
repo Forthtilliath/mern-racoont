@@ -3,6 +3,9 @@ dotenv.config({ path: './config/.env' });
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
+import nocache from 'nocache';
+import helmet from 'helmet';
+import compression from 'compression'
 
 import './config/database.js';
 
@@ -22,6 +25,9 @@ const corsOptions = {
     preflightContinue: false,
 };
 
+app.use(helmet());
+app.use(compression());
+app.use(nocache());
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
