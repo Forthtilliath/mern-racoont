@@ -21,12 +21,17 @@ router.delete('/:id', userController.deleteUser);
 router.patch('/follow/:id', userController.follow);
 router.patch('/unfollow/:id', userController.unfollow);
 
+const check = (req,res,next) => {
+    console.log('File',req.file);
+    next();
+}
+
 // upload
 /** 
  * NOTE : Ordre des données
  * Les autres données que le fichier doivent être mise avant le fichier
  * sinon elles ne sont pas envoyées !
  */
-router.post('/upload', multer.avatar, sharp.avatar, uploadController.uploadProfile);
+router.post('/upload', multer.avatar, check,sharp.avatar, uploadController.uploadProfile);
 
 export default router;

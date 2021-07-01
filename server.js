@@ -26,7 +26,8 @@ const corsOptions = {
 };
 
 app.use(helmet());
-app.use(compression());
+// Provoque un problème avec le changement de photo de l'avatar
+// app.use(compression());
 app.use(nocache());
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));

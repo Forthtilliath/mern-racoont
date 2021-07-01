@@ -1,6 +1,6 @@
 # Intoroduction
 
-Ce projet est un gros projet MERN (MongoDB, Express, React et Nodejs) afin de créer un réseau social. Le projet est découpé en 2 parties : [Partie Back-end](https://www.youtube.com/watch?v=SUPDFHuvhRc) et [Partie Front-end](https://www.youtube.com/watch?v=ghdRD3pt8rg).
+Ce projet est un gros projet MERN (MongoDB, Express, React et Nodejs) afin de créer un réseau social. Le projet est découpé en 2 parties : [Partie Back-end](https://www.youtube.com/watch?v=SUPDFHuvhRc) et [Partie Front-end](https://www.youtube.com/watch?v=ghdRD3pt8rg). Le style du projet est inclus dans les fichiers de base.
 
 # Intérêts du projet
 
@@ -99,13 +99,18 @@ Il est aussi possible d'encoder l'email afin que dans le cas où celui ci est r�
 
 https://www.npmjs.com/package/react-helmet
 
+## Changement de l'image du profil plus transparente
+
+En effet, je trouve que le changement de l'image du profil manque de transparence. Qu'est-ce que j'entends par cela ?<br/>
+J'entends par là, que lorsque l'utilisateur change d'image, rien ne lui indique que la nouvelle image a été accepter jusqu'au moment où il valide son choix. Il serait donc bien de modifier l'image affichée par la nouvelle afin de montrer une prévisualisation de ce que cela donnera et surtout avertir l'utilisateur que son choix est bien pris en compte.
+
 # Améliorations apportées
 
 ## Ajout de middlewares
 
 Dans le but d'améliorer la sécurité et optimiser les performances, j'ai mis en place 3 middlewares, helmet, nocache et compression.
 
-J'ai aussi légèrement augmenter le salt pour l'encodage du mot de passe car plus les années passent, plus les ordinateurs/serveurs sont puissants, et plus il est rapide de générer un mot de passe encodé, ainsi que de tenter de les crackers. 
+J'ai aussi légèrement augmenté le salt pour l'encodage du mot de passe car plus les années passent, plus les ordinateurs/serveurs sont puissants, et plus il est rapide de générer un mot de passe encodé, ainsi que de tenter de les crackers. 
 
 Afin d'optimiser la place occupée par les images que les utilisateurs uploads, j'ai installé un middleware pour les compresser. J'utilise sharp pour faire ceci. J'ai configuré pour que les images du profil soient redimmentionnée à maximum 180px en hauteur et largeur (la taille la plus grosse affichée sur le site sur le profil), et soit compressé de 50%.<br/>
 Les images des posts sont quant à elle réduite à 2000px et compressées de 50%.
@@ -114,6 +119,7 @@ Ces réglages sont facilement modifiables via le fichier env.
 
 # Screenshots du projet
 
+## Screens à la fin de la video
 ### Thread
 ![thread](/screenshots/thread.png)
 
@@ -123,3 +129,5 @@ Ces réglages sont facilement modifiables via le fichier env.
 
 ### Trending
 ![trending](/screenshots/trending.png)
+
+## Screen suite aux modifications apportées
