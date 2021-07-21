@@ -1,4 +1,4 @@
-# Intoroduction
+# Introduction
 
 Ce projet est un gros projet MERN (MongoDB, Express, React et Nodejs) afin de créer un réseau social. Le projet est découpé en 2 parties : [Partie Back-end](https://www.youtube.com/watch?v=SUPDFHuvhRc) et [Partie Front-end](https://www.youtube.com/watch?v=ghdRD3pt8rg). Le style du projet est inclus dans les fichiers de base.
 
@@ -27,6 +27,8 @@ J'ai aussi rencontré des difficultés lorsque je modifiais le code afin de l'op
 # Ce que m'a apporté ce projet
 
 Ce projet m'a énormement apporté. J'ai pu réellement découvrir Réact au sein d'un projet intéressant et de grosse envergure. Redux apporte tellement dès le moment où l'on a besoin de partager des données entre les pages. 
+
+L'intérêt de ce projet était de développer un site fullstack. Comme nous avons commencé par le back, il était nécessaire de tester ce que nous développions. Pour cela, nous utilisions Postman. J'avais déjà eu l'occasion de m'en servir, mais plus en survol qu'autre chose. Ici, j'ai eu l'occassion d'apprendre à m'en servir correctement pour tester chacune des routes ainsi que les erreurs possibles pour vérifier les retours fait par le back.
 
 Travailler sur un projet comme celui ci m'a aussi aidé à mieux structurer mes fichiers, sinon cela aurait été rapidement la pagaille pour s'y retrouver, que ce soit pour retrouver un fichier ou retrouver un bout de code dans un fichier si tout était mal structuré.
 
